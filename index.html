@@ -89,7 +89,7 @@
     .f2 { top: 60%; left: 8%; animation-delay: 1s; }
     .f3 { top: 15%; right: 5%; animation-delay: 2s; }
     .f4 { bottom: 5%; right: 10%; animation-delay: 3s; }
-    .f5 { top: 40%; left: 45%; animation-delay: 4s; }
+    .f5 { top: 35%; right: 40%; animation-delay: 4s; }
 
     @keyframes float {
         0% { transform: translateY(0px); }
@@ -173,8 +173,14 @@
 
     // Yes button response
     function sayYes() {
+        // Reset button sizes
+        yesSize = 1;
+        noSize = 1;
+        yesBtn.style.transform = `scale(${yesSize})`;
+        noBtn.style.transform = `scale(${noSize})`;
+        
         document.getElementById("response").innerHTML = 
-        "You just made me the HAPPIEST guy alive";
+        "You just made me the happiest guy alive ❤️🥹";
     }
 </script>
 
