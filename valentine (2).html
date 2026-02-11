@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Will You Be My Valentine?</title>
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        font-family: 'Arial', sans-serif;
+        text-align: center;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .container {
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        max-width: 400px;
+        position: relative;
+        z-index: 10;
+    }
+
+    h1 {
+        color: #ff4d6d;
+        margin-bottom: 20px;
+    }
+
+    p {
+        font-size: 18px;
+        color: #444;
+    }
+
+    .buttons {
+        margin-top: 30px;
+        position: relative;
+    }
+
+    button {
+        padding: 12px 24px;
+        font-size: 16px;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        margin: 10px;
+        transition: 0.2s ease;
+        position: relative;
+    }
+
+    .yes {
+        background-color: #ff4d6d;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .yes:hover {
+        transform: scale(1.1);
+    }
+
+    .no {
+        background-color: #ddd;
+    }
+
+    #response {
+        margin-top: 20px;
+        font-size: 20px;
+        color: #ff4d6d;
+        font-weight: bold;
+    }
+
+    /* Floating Photos */
+    .floating {
+        position: absolute;
+        width: 140px;
+        border-radius: 20px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+        animation: float 6s ease-in-out infinite;
+        opacity: 0.95;
+        z-index: 1;
+    }
+
+    .f1 { top: 5%; left: 5%; animation-delay: 0s; }
+    .f2 { top: 60%; left: 8%; animation-delay: 1s; }
+    .f3 { top: 15%; right: 5%; animation-delay: 2s; }
+    .f4 { bottom: 5%; right: 10%; animation-delay: 3s; }
+    .f5 { bottom: 5%; left: 50%; transform: translateX(-50%); animation-delay: 4s; }
+
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+        100% { transform: translateY(0px); }
+    }
+</style>
+</head>
+<body>
+
+<!-- Floating Images -->
+<img src="1.jpg" class="floating f1">
+<img src="2.jpg" class="floating f2">
+<img src="3.jpg" class="floating f3">
+<img src="4.jpg" class="floating f4">
+<img src="5.jpg" class="floating f5">
+
+<div class="container">
+    <h1>Hey Stinkyfart ❤️</h1>
+    <p>From our first facetime call to every spontaneous adventure</p>
+    <p>Out of all the people in the world…</p>
+    <p>I choose you.</p>
+    <p>Will you be my Valentine?</p>
+
+    <div class="buttons">
+        <button class="yes" id="yesBtn">Yes 💘</button>
+        <button class="no" id="noBtn">No 😢</button>
+    </div>
+
+    <div id="response"></div>
+</div>
+
+<script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const messages = [
+        "Are you sure?",
+        "Wrong answer detected.",
+        "WHAT ARE YOU DOING",
+        "You hate me.",
+        "JUST PRESS YES ALREADY",
+        "Are you sure? ",
+        "Wrong answer detected! ",
+        "WHAT ARE YOU DOING ",
+        "You hate me… right? ",
+        "JUST PRESS YES ALREADY ",
+        "This is betrayal… ",
+        "I can't believe this is happening",
+        "Do you even love me?! ",
+        "Stop… my heart can't take it ",
+        "Seriously? Right now? ",
+        "I thought we were forever… ",
+        "You're breaking me… ",
+        "NOOOO! Why would you do this",
+        "I feel personally attacked",
+        "You monster… ",
+        "I'm gonna cry if you don't say yes",
+        "The audacity… ",
+        "Do you want me to sulk forever? ",
+        "My heart… it's shattered ",
+        "Are you trying to ruin Valentine's Day? "
+    ];
+    let messageIndex = 0;
+
+    let yesSize = 1;
+    let noSize = 1;
+
+    // Yes button click handler
+    yesBtn.addEventListener("click", function() {
+        // Reset button sizes
+        yesSize = 1;
+        noSize = 1;
+        yesBtn.style.transform = "scale(1)";
+        yesBtn.style.backgroundColor = "#ff4d6d";
+        noBtn.style.transform = "scale(1)";
+        
+        document.getElementById("response").innerHTML = 
+        "You just made me the happiest guy alive ❤️🥹";
+    });
+
+    // No button click handler
+    noBtn.addEventListener("click", function() {
+        yesSize += 0.2;
+        yesBtn.style.transform = "scale(" + yesSize + ")";
+        // Make button more opaque as it grows - starts at full opacity and stays there
+        yesBtn.style.backgroundColor = "#ff4d6d";
+
+        noSize -= 0.05;
+        if (noSize < 0.5) noSize = 0.5;
+        noBtn.style.transform = "scale(" + noSize + ")";
+
+        document.getElementById("response").innerHTML =
+            messages[messageIndex % messages.length];
+        messageIndex++;
+    });
+</script>
+
+</body>
+</html>
