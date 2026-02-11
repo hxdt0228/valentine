@@ -15,6 +15,7 @@
         font-family: 'Arial', sans-serif;
         text-align: center;
         overflow: hidden;
+        position: relative;
     }
 
     .container {
@@ -23,6 +24,8 @@
         border-radius: 20px;
         box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         max-width: 400px;
+        position: relative;
+        z-index: 10;
     }
 
     h1 {
@@ -48,6 +51,7 @@
         cursor: pointer;
         margin: 10px;
         transition: 0.2s ease;
+        position: relative;
     }
 
     .yes {
@@ -70,9 +74,39 @@
         color: #ff4d6d;
         font-weight: bold;
     }
+
+    /* Floating Photos */
+    .floating {
+        position: absolute;
+        width: 140px;
+        border-radius: 20px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+        animation: float 6s ease-in-out infinite;
+        opacity: 0.95;
+        z-index: 1;
+    }
+
+    .f1 { top: 5%; left: 5%; animation-delay: 0s; }
+    .f2 { top: 60%; left: 8%; animation-delay: 1s; }
+    .f3 { top: 15%; right: 5%; animation-delay: 2s; }
+    .f4 { bottom: 5%; right: 10%; animation-delay: 3s; }
+    .f5 { top: 40%; left: 45%; animation-delay: 4s; }
+
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+        100% { transform: translateY(0px); }
+    }
 </style>
 </head>
 <body>
+
+<!-- Floating Images -->
+<img src="1.jpg" class="floating f1">
+<img src="2.jpg" class="floating f2">
+<img src="3.jpg" class="floating f3">
+<img src="4.jpg" class="floating f4">
+<img src="5.jpg" class="floating f5">
 
 <div class="container">
     <h1>Hey Stinkyfart ❤️</h1>
@@ -82,7 +116,7 @@
     <p>Will you be my Valentine?</p>
 
     <div class="buttons">
-        <button class="yes" onclick="sayYes()">Yes 💘</button>
+        <button class="yes" id="yesBtn" onclick="sayYes()">Yes 💘</button>
         <button class="no" id="noBtn">No 😢</button>
     </div>
 
@@ -91,14 +125,45 @@
 
 <script>
     const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const messages = [
+        "Are you sure?",
+        "Wrong answer detected.",
+        "WHAT ARE YOU DOING",
+        "you hate me.",
+        "JUST PRESS YES ALREADY"
+    ];
+    let messageIndex = 0;
 
+    let yesSize = 1;
+    let noSize = 1;
+
+    // Move No button on hover
     noBtn.addEventListener("mouseover", () => {
-        const x = Math.random() * (window.innerWidth - 100);
-        const y = Math.random() * (window.innerHeight - 50);
+        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
         noBtn.style.left = x + "px";
         noBtn.style.top = y + "px";
     });
 
+    // Shrink No button and show messages on click
+    noBtn.addEventListener("click", () => {
+        yesSize += 0.3;
+        yesBtn.style.transform = `scale(${yesSize})`;
+
+        noSize -= 0.15;
+        if (noSize > 0.2) {
+            noBtn.style.transform = `scale(${noSize})`;
+        } else {
+            noBtn.style.display = "none";
+        }
+
+        document.getElementById("response").innerHTML =
+            messages[messageIndex % messages.length];
+        messageIndex++;
+    });
+
+    // Yes button response
     function sayYes() {
         document.getElementById("response").innerHTML = 
         "You just made me the happiest guy alive ❤️🥹";
