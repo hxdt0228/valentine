@@ -50,14 +50,15 @@
         border-radius: 30px;
         cursor: pointer;
         margin: 10px;
-        transition: 0.2s ease;
+        transition: transform 0.2s ease;
         position: relative;
     }
 
     .yes {
-        background-color: #ff4d6d !important;
-        color: white;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        background-color: rgb(255, 77, 109) !important;
+        color: white !important;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        font-weight: bold;
     }
 
     .yes:hover {
@@ -164,7 +165,7 @@
         yesSize = 1;
         noSize = 1;
         yesBtn.style.transform = "scale(1)";
-        yesBtn.style.setProperty("background-color", "#ff4d6d", "important");
+        yesBtn.style.setProperty("background-color", "rgb(255, 77, 109)", "important");
         noBtn.style.transform = "scale(1)";
         
         document.getElementById("response").innerHTML = 
@@ -175,8 +176,8 @@
     noBtn.addEventListener("click", function() {
         yesSize += 0.2;
         yesBtn.style.transform = "scale(" + yesSize + ")";
-        // Keep button bright pink - use !important to override
-        yesBtn.style.setProperty("background-color", "#ff4d6d", "important");
+        // Keep button bright pink solid color
+        yesBtn.style.setProperty("background-color", "rgb(255, 77, 109)", "important");
 
         noSize -= 0.05;
         if (noSize < 0.5) noSize = 0.5;
