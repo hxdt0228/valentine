@@ -130,7 +130,7 @@
         "Are you sure?",
         "Wrong answer detected.",
         "WHAT ARE YOU DOING",
-        "you hate me.",
+        "You hate me.",
         "JUST PRESS YES ALREADY"
     ];
     let messageIndex = 0;
@@ -146,17 +146,14 @@
         noBtn.style.top = y + "px";
     });
 
-    // Shrink No button and show messages on click
+    // Slightly shrink No button on click but never disappear
     noBtn.addEventListener("click", () => {
-        yesSize += 0.3;
+        yesSize += 0.2;
         yesBtn.style.transform = `scale(${yesSize})`;
 
-        noSize -= 0.15;
-        if (noSize > 0.2) {
-            noBtn.style.transform = `scale(${noSize})`;
-        } else {
-            noBtn.style.display = "none";
-        }
+        noSize -= 0.05; // shrink a little
+        if (noSize < 0.5) noSize = 0.5; // never smaller than 0.5
+        noBtn.style.transform = `scale(${noSize})`;
 
         document.getElementById("response").innerHTML =
             messages[messageIndex % messages.length];
