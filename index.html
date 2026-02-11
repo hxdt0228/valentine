@@ -55,8 +55,8 @@
     }
 
     .yes {
-        background-color: rgb(255, 77, 109) !important;
-        color: white !important;
+        background-color: #ff4d6d;
+        color: white;
         text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         font-weight: bold;
     }
@@ -158,14 +158,16 @@
 
     let yesSize = 1;
     let noSize = 1;
+    let clickCount = 0;
 
     // Yes button click handler
     yesBtn.addEventListener("click", function() {
         // Reset button sizes
         yesSize = 1;
         noSize = 1;
+        clickCount = 0;
         yesBtn.style.transform = "scale(1)";
-        yesBtn.style.setProperty("background-color", "rgb(255, 77, 109)", "important");
+        yesBtn.style.opacity = "1";
         noBtn.style.transform = "scale(1)";
         
         document.getElementById("response").innerHTML = 
@@ -174,10 +176,13 @@
 
     // No button click handler
     noBtn.addEventListener("click", function() {
+        clickCount++;
         yesSize += 0.2;
         yesBtn.style.transform = "scale(" + yesSize + ")";
-        // Keep button bright pink solid color
-        yesBtn.style.setProperty("background-color", "rgb(255, 77, 109)", "important");
+        
+        // Make button lighter/more transparent as it grows
+        let opacity = Math.max(0.3, 1 - (clickCount * 0.05));
+        yesBtn.style.opacity = opacity;
 
         noSize -= 0.05;
         if (noSize < 0.5) noSize = 0.5;
