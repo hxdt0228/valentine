@@ -41,6 +41,7 @@
     .buttons {
         margin-top: 30px;
         position: relative;
+        height: 60px;
     }
 
     button {
@@ -51,12 +52,12 @@
         cursor: pointer;
         margin: 10px;
         transition: 0.2s ease;
-        position: relative;
     }
 
     .yes {
         background-color: #ff4d6d;
         color: white;
+        position: relative;
     }
 
     .yes:hover {
@@ -66,6 +67,9 @@
     .no {
         background-color: #ddd;
         position: absolute;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
     }
 
     #response {
@@ -140,10 +144,13 @@
 
     // Move No button on hover
     noBtn.addEventListener("mouseover", () => {
-        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+        const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+        const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+        const x = Math.random() * maxX;
+        const y = Math.random() * maxY;
         noBtn.style.left = x + "px";
         noBtn.style.top = y + "px";
+        noBtn.style.transform = `scale(${noSize})`;
     });
 
     // Slightly shrink No button on click but never disappear
@@ -151,8 +158,8 @@
         yesSize += 0.2;
         yesBtn.style.transform = `scale(${yesSize})`;
 
-        noSize -= 0.05; // shrink a little
-        if (noSize < 0.5) noSize = 0.5; // never smaller than 0.5
+        noSize -= 0.05;
+        if (noSize < 0.5) noSize = 0.5;
         noBtn.style.transform = `scale(${noSize})`;
 
         document.getElementById("response").innerHTML =
