@@ -41,7 +41,6 @@
     .buttons {
         margin-top: 30px;
         position: relative;
-        height: 60px;
     }
 
     button {
@@ -52,12 +51,12 @@
         cursor: pointer;
         margin: 10px;
         transition: 0.2s ease;
+        position: relative;
     }
 
     .yes {
         background-color: #ff4d6d;
         color: white;
-        position: relative;
     }
 
     .yes:hover {
@@ -66,10 +65,6 @@
 
     .no {
         background-color: #ddd;
-        position: absolute;
-        left: 50%;
-        top: 0;
-        transform: translateX(-50%);
     }
 
     #response {
@@ -142,17 +137,6 @@
     let yesSize = 1;
     let noSize = 1;
 
-    // Move No button on hover
-    noBtn.addEventListener("mouseover", () => {
-        const maxX = window.innerWidth - noBtn.offsetWidth - 20;
-        const maxY = window.innerHeight - noBtn.offsetHeight - 20;
-        const x = Math.random() * maxX;
-        const y = Math.random() * maxY;
-        noBtn.style.left = x + "px";
-        noBtn.style.top = y + "px";
-        noBtn.style.transform = `scale(${noSize})`;
-    });
-
     // Slightly shrink No button on click but never disappear
     noBtn.addEventListener("click", () => {
         yesSize += 0.2;
@@ -170,7 +154,7 @@
     // Yes button response
     function sayYes() {
         document.getElementById("response").innerHTML = 
-        "You just made me the happiest guy alive ❤️🥹";
+        "You just made me the HAPPIEST guy alive";
     }
 </script>
 
